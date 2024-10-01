@@ -6,6 +6,7 @@ import ReusableButton from './ReusableButton'
 // Can also be written as ( { users } ) 
 const UserList = (props) => {
   const [users, setUsers] = useState(props.users)
+  const [selectedUser, setSelectedUser] = useState(null)
 
   // Let's write a function to delete users from the list
   const deleteUser = (index) => {
@@ -16,17 +17,43 @@ const UserList = (props) => {
     setUsers(newUsers)
   }
 
+  const selectUser = (index) => {
+    setSelectedUser(users[index])
+  }
+
   return (
     <div>
       <h1>List of Users</h1>
       {/* { users.map((user, index) => <p>{user}</p> )} */}
 
-      {/* Let's add the reusable button component to the user */}
+      {/* <h3>Selected User</h3> */}
+      {/* <p>{selectedUser}</p> */}
+
+      {/* We only want to display the selected user if they exist */}
+      {/* So we check if there is a selected user and then we display this */}
+
+      { selectUser && 
+        <div>
+          <h3>Selected User</h3>
+          <p>{selectedUser}</p>
+        </div>
+      }
+
+      <h3>Users</h3>
+
       { users.map((user, index) => 
         <div key={index}>
           <p>{user}</p>
 
-          <ReusableButton handleClick={() => deleteUser(index)}/>
+          {/* Let's add the reusable button component to the user */}
+          <ReusableButton handleClick={() => deleteUser(index)} title="Delete User"/>
+
+          <br />
+
+          {/* Now we want to be able to select the user */}
+          <ReusableButton handleClick={() => selectUser(index)} title="Delete User"/>
+
+            {/* Old - calling the function in the component normally */}
           {/* <button onClick={() => deleteUser(index)}>Click Me</button> */}
 
         </div>

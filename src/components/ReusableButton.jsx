@@ -22,7 +22,7 @@ const ReusableButton = (props) => {
 
   return (
     <div>
-      <button style={buttonStyle} onClick={props.handleClick}>Click Me</button>
+      <button style={buttonStyle} onClick={props.handleClick}>{props.title}</button>
     </div>
   )
 }
