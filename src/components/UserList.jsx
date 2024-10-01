@@ -51,7 +51,7 @@ const UserList = (props) => {
           <br />
 
           {/* Now we want to be able to select the user */}
-          <ReusableButton handleClick={() => selectUser(index)} title="Delete User"/>
+          <ReusableButton handleClick={() => selectUser(index)} title="Select User"/>
 
             {/* Old - calling the function in the component normally */}
           {/* <button onClick={() => deleteUser(index)}>Click Me</button> */}
