@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 
+// We can use props to pass through the users list
 const UserList = (props) => {
-  // users is now equal to an empty list
-  const [users, setUsers] = [props.users]
+  const [users, setUsers] = useState(props.users)
 
   return (
     <div>
@@ -15,7 +15,7 @@ const UserList = (props) => {
 
 // We can use props to set a default value for this list so the page isn't empty when it loads 
 UserList.defaultProps = {
-  users: ["Jake", "Sally", "Sarah"]
+  users: ["Jake Default", "Sally Default", "Sarah Default"]
 }
 
 export default UserList
