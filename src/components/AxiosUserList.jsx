@@ -3,12 +3,16 @@ import { useState } from 'react'
 import ReusableButton from './ReusableButton'
 import axios from 'axios'
 import CreateUserForm from './CreateUserForm'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const AxiosUserList = () => {
   // Initializing the users state with an empty array
   const [users, setUsers] = useState([])
   const [selectedUser, setSelectedUser] = useState(null)
   const [selectedUserInfo, setSelectedUserInfo] = useState(null)
+
+  const navigate = useNavigate()
 
   const deleteUser = (index) => {
     const newUsers = users.filter((user, i) => i !== index)
@@ -17,11 +21,13 @@ const AxiosUserList = () => {
 
   const selectUser = (id) => {
     setSelectedUser(id)
-    getUserInfo(id)
+    navigate(`/axios-users/${id}`)
+    // getUserInfo(id)
   }
 
   // Let's write a function to get more information about the selected user
   const getUserInfo = (id) => {
+    // promise (fullfill, reject).then().catch() 
     axios.get(`https://fakestoreapi.com/users/${id}`)
       .then(response => {
         console.log(response)
@@ -58,7 +64,7 @@ const AxiosUserList = () => {
   return (
     <div>
 
-      <h1>Create User</h1>
+      <h3>Create User</h3>
       <CreateUserForm />
 
       <h1>List of Users</h1>
@@ -85,6 +91,8 @@ const AxiosUserList = () => {
           <ReusableButton handleClick={() => deleteUser(index)} title="Delete User"/>
           <br />
           <ReusableButton handleClick={() => selectUser(user.id)} title="Select User"/>
+
+          <Link to={`/axios-users/${user.id}`}>Details</Link>
 
         </div>
       )}
